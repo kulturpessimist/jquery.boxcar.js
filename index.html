@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<title>Example</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+		<script src="jquery.boxcar.js" type="text/javascript"></script>
+		<style type="text/css">
+			body{ font-family: Helvetica; font-size: 12px; }
+			label{ width: 100px; display: block; float: left; line-height: 22px; }
+			pre{ margin-left: 20px; border-left: 4px solid #CCC; }
+		</style>
+	</head>
+	<body>
+		
+		<label>Key</label> 			<input type="text" value="" name="key" id="key" /><br/>
+		<label>Secret</label> 		<input type="text" value="" name="secret" id="secret" /><br/>
+		<label>Email (MD5)</label> 	<input type="text" value="" name="email" id="email" />
+		<br/><br/>
+		<input type="button" id="invite" value="invite"/>
+		<input type="button" id="notify" value="notify"/>
+		<input type="button" id="broadcast" value="broadcast"/>
+		<pre>
+	
+	$.boxcar( 
+		{	
+			key:'',
+			invite:''
+		}
+	);
+
+	$.boxcar( 
+		{	
+			key:'',
+			email:'',
+			from_screen_name:'jquery.boxcar.js',
+			message:'Hello World!',
+			
+			from_remote_service_id:123456789,
+			redirect_payload:'http://www.github.com/',
+			source_url:'http://www.github.com/',
+			icon_url:'http://f.cl.ly/items/3L111a1C013q2M2R081a/demo.jpg'
+		}
+	);
+
+	$.boxcar( 
+		{	
+			key:'',
+			secret:'',
+			from_screen_name:'jquery.boxcar.js',
+			message:'Hello World @all!'
+		}
+	);
+			
+		</pre>
+		
+		<script type="text/javascript">
+			$('#key').keyup(function(){
+				$('pre').text( 
+					$('pre').text().replace( /key: ?(.+)?/g, "key:'"+$('#key').val()+"',")
+				);
+			});
+			$('#secret').keyup(function(){
+				$('pre').text( 
+					$('pre').text().replace( /secret:?(.+)?/g, "secret:'"+$('#secret').val()+"',")
+				);
+			});
+			$('#email').keyup(function(){
+				$('pre').text( 
+					$('pre').text().replace( /email: ?(.+)?/g, "email:'"+$('#email').val()+"',")
+				);
+				$('pre').text( 
+					$('pre').text().replace( /invite: ?(.+)?/g, "invite:'"+$('#email').val()+"',")
+				);
+			});
+			
+			$('#invite').click(function(){
+				$.boxcar( 
+					{	
+						key:$('#key').val(),
+						invite:$('#email').val()
+					}
+				);
+			});
+				
+			$('#notify').click(function(){
+				$.boxcar( 
+					{	
+						key:$('#key').val(),
+						email:$('#email').val(),
+						from_screen_name:'jquery.boxcar.js',
+						message:'Hello World!',
+						
+						from_remote_service_id:(new Date()).getTime(),
+						redirect_payload:'http://www.github.com/',
+						source_url:'http://www.github.com/',
+						icon_url:'http://f.cl.ly/items/3L111a1C013q2M2R081a/demo.jpg'
+					}
+				);
+			});
+				
+			$('#broadcast').click(function(){
+				$.boxcar( 
+					{	
+						key:$('#key').val(),
+						secret:$('#secret').val(),
+						from_screen_name:'jquery.boxcar.js',
+						message:'Hello World @all!'
+					}
+				);
+			});
+		</script>
+	
+	</body>
+</html>
