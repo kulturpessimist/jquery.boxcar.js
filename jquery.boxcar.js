@@ -53,7 +53,7 @@
 			$.error('wrong parameter count for boxcar.')
 		}
 		
-		//inject iframe as target of the form
+		//inject iframe as target for the form
 		$('<iframe />')
 		.attr('id', '__i__boxcar')
 		.attr('name', '__i__boxcar')
